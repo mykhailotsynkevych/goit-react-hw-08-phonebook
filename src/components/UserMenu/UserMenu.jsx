@@ -9,10 +9,10 @@ export default function UserMenu() {
 
 
   return (
-    <div className={s.link}>
-      <span>Hi, {name}</span>
-      <button type="button" onClick={() => dispatch(operations.logOut())}>
-        Выйти
+    <div className={s.wrap}>
+      <span className={s.link}>Hi, {name}</span>
+      <button className={s.button} type="button" onClick={() => dispatch(operations.logOut())}>
+        Log Out
       </button>
     </div>
   );
