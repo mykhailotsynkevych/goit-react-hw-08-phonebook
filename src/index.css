@@ -54,3 +54,12 @@ p {
   animation-duration: 750ms;
   animation-timing-function: linear;
 }
+
+.mainTitle {
+display: flex;
+justify-content: center;
+
+    animation-name: changeOpacity;
+      animation-duration: 750ms;
+      animation-timing-function: linear;
+}
