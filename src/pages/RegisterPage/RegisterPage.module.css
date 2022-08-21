@@ -1,6 +1,6 @@
 .form {
   width: 550px;
-  margin: 5px 5px 5px 2px;
+  margin: 5px auto;
   display: flex;
   flex-direction: column;
 }

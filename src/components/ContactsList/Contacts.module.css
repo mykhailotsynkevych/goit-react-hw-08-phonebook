@@ -43,7 +43,7 @@ margin: 5px;
 .button:hover,
 .button:focus {
     scale: 1.03;
-  background-color: #4bb1ff;
+  background-color: rgb(25, 255, 132);
   border: none;
 
   border-radius: 2px;

@@ -1,28 +1,25 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from '../redux/contacts/contacts-operations';
-import { useEffect } from 'react';
 
-import Form from './Form/Form';
-import Filter from './Filter/Filter';
-import ContactsList from './ContactsList/ContactsList';
+import { Route, Routes } from 'react-router-dom';
+import { SharedLayout } from "./SharedLayout/SharedLayout";
+import HomePage from "../pages/HomePage/HomePage";
+
+import RegisterPage from '../pages/RegisterPage/RegisterPage';
+import LoginPage from '../pages/LoginPage/LoginPage';
+import ContactsPage from '../pages/ConatctsPage/ContactsPage';
 
 const App = () => {
-  const contacts = useSelector(state => state.contacts.items.length);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getContacts());
-  });
 
   return (
-    <div className="container">
-      <h1>Phonebook</h1>
-      <Form />
-      <h2>Contacts: {contacts}</h2>
-      <Filter />
-      <ContactsList />
-    </div>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="contacts" element={<ContactsPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Route>
+    </Routes>
   );
 };
 
