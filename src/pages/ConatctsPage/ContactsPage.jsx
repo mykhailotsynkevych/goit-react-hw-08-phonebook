@@ -8,13 +8,12 @@ import Filter from '../../components/Filter/Filter';
 import ContactsList from '../../components/ContactsList/ContactsList';
 
 const ContactsPage = () => {
-  const contacts = useSelector(state => state.contacts.items.length);
 
+  const contacts = useSelector(state => state.contacts.items.length);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (contacts === 0) return;
     dispatch(getContacts());
-  });
+      });
 
   return (
     <div className="container">
