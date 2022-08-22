@@ -7,13 +7,17 @@ import Form from '../../components/Form/Form';
 import Filter from '../../components/Filter/Filter';
 import ContactsList from '../../components/ContactsList/ContactsList';
 
+import { getIsContacts } from '../../redux/contacts/contacts-selectors';
+
 const ContactsPage = () => {
+  const isContacts = useSelector(getIsContacts);
 
   const contacts = useSelector(state => state.contacts.items.length);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getContacts());
-      });
+    !isContacts && dispatch(getContacts());
+  }, [dispatch, isContacts]);
 
   return (
     <div className="container">
