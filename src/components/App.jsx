@@ -1,35 +1,44 @@
-import React from 'react';
-
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
+import React, { lazy, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { SharedLayout } from "./SharedLayout/SharedLayout";
-import HomePage from "../pages/HomePage/HomePage";
-
-import RegisterPage from '../pages/RegisterPage/RegisterPage';
-import LoginPage from '../pages/LoginPage/LoginPage';
-import ContactsPage from '../pages/ConatctsPage/ContactsPage';
-
+import { SharedLayout } from './SharedLayout/SharedLayout';
 import operations from '../redux/auth/auth-operations';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
+import authSelectors from '../redux/auth/auth-selectors';
+
+const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const ContactsPage = lazy(() => import('../pages/ConatctsPage/ContactsPage'));
 
 const App = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
 
   useEffect(() => {
     dispatch(operations.fetchCurrentUser());
   }, [dispatch]);
 
   return (
-    <Routes>
+    !isFetchingCurrentUser && (<Routes>
       <Route path="/" element={<SharedLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="contacts" element={<ContactsPage />} />
+        <Route index element={<PublicRoute component={HomePage} />} />
+        <Route
+          path="register"
+          element={<PublicRoute component={RegisterPage} restricted />}
+        />
+        <Route
+          path="login"
+          element={<PublicRoute component={LoginPage} restricted />}
+        />
+        <Route
+          path="contacts"
+          element={<PrivateRoute component={ContactsPage} />}
+        />
         <Route path="*" element={<HomePage />} />
       </Route>
-    </Routes>
+    </Routes>)
   );
 };
 
