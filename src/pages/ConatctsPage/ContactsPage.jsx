@@ -12,6 +12,7 @@ const ContactsPage = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    if (contacts === 0) return;
     dispatch(getContacts());
   });
 
