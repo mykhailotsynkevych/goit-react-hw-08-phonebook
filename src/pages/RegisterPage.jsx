@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import operations from '../../redux/auth/auth-operations';
-import s from './RegisterPage.module.css';
+import operations from '../redux/auth/auth-operations';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -33,12 +32,13 @@ const RegisterPage = () => {
   return (
     <>
       <h1 className="mainTitle">Registration Page</h1>
+      <h2 className="secondTitle">Register</h2>
 
-      <form onSubmit={handleSubmit} className={s.form}>
-        <label className={s.form}>
-          <span className={s.inputTitle}> Name</span>
+      <form onSubmit={handleSubmit} className="form">
+        <label className="label">
+          <span className="inputTitle">Name</span>
           <input
-            className={s.input}
+            className="input"
             type="text"
             name="name"
             required
@@ -46,10 +46,10 @@ const RegisterPage = () => {
             onChange={handleChange}
           />
         </label>
-        <label className={s.form}>
-          <span className={s.inputTitle}> Email </span>
+        <label className="label">
+          <span className="inputTitle">Email</span>
           <input
-            className={s.input}
+            className="input"
             type="email"
             name="email"
             value={email}
@@ -57,17 +57,18 @@ const RegisterPage = () => {
             required
           />
         </label>
-        <label className={s.form}>
-          <span className={s.inputTitle}> Password </span>
+        <label className="label">
+          <span className="inputTitle">Password</span>
           <input
-            className={s.input}
+            className="input"
             type="password"
             name="password"
             value={password}
             onChange={handleChange}
           />
+          <span className="inputTitle">min 8 characters</span>
         </label>
-        <button type="submit" className={s.button}>
+        <button type="submit" className="button">
           Register
         </button>
       </form>

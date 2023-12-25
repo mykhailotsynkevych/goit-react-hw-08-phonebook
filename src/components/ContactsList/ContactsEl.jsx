@@ -6,7 +6,7 @@ const ContactsEl = ({name, number, onDeleteContact }) => {
     <div className={s.item}>
       <p className={s.discription}>{name}</p>
       <p className={s.discription}>{number}</p>
-      <button className={s.button} onClick={onDeleteContact}>
+      <button className="button" onClick={onDeleteContact}>
         Delete
       </button>
     </div>

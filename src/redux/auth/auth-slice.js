@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import authOperations from './auth-operations';
 
 const initialState = {
-  user: { email: null, password: null },
+  user: {name: null, email: null },
   token: null,
   isLoggedIn: false,
   isFetchingCurrentUser: false,
@@ -13,6 +13,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: {
+    //REGISTRATION
     [authOperations.register.pending]: state => {
       state.isLoading = true;
       state.error = null;
@@ -29,7 +30,7 @@ const authSlice = createSlice({
       state.error = action;
     },
 
-    //
+    //LOGIN
     [authOperations.logIn.pending]: state => {
       state.isLoading = true;
       state.error = null;
@@ -43,7 +44,8 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.error = action;
     },
-    //
+
+    //LOGOUT
     [authOperations.logOut.pending](state) {
       state.isLoading = true;
       state.error = null;
@@ -53,11 +55,12 @@ const authSlice = createSlice({
       state.token = null;
       state.isLoggedIn = false;
     },
-    [authOperations.logOut.rejected](state, {action }) {
+    [authOperations.logOut.rejected](state, { action }) {
       state.isLoading = false;
       state.error = action;
     },
-    //
+
+    //CURRENTUSER
     [authOperations.fetchCurrentUser.pending](state) {
       state.isLoading = true;
       state.error = null;
@@ -68,7 +71,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.isFetchingCurrentUser = false;
     },
-    [authOperations.fetchCurrentUser.rejected](state, {action}) {
+    [authOperations.fetchCurrentUser.rejected](state, { action }) {
       state.isFetchingCurrentUser = false;
       state.isLoading = false;
       state.error = action;

@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import s from './Filter.module.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { changeFilter } from '../../redux/contacts/contacts-actions';
@@ -16,10 +15,10 @@ const Filter = () => {
   };
   return (
     <>
-      <label className={s.filtr}>
-        <span className={s.inputTitle}> Filtr by Name </span>
+      <label className="label">
+        <span className="inputTitle"> Filtr by Name </span>
         <input
-          className={s.input}
+          className="input"
           type="text"
           name="value"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
