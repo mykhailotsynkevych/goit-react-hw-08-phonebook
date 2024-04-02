@@ -8,10 +8,10 @@ import Filter from '../components/Filter/Filter';
 import ContactsList from '../components/ContactsList/ContactsList';
 import UserMenu from '../components/UserMenu/UserMenu';
 
-import { getIsContacts } from '../redux/contacts/contacts-selectors';
+import { selectIsContacts } from '../redux/contacts/contacts-selectors';
 
 const ContactsPage = () => {
-  const isContacts = useSelector(getIsContacts);
+  const isContacts = useSelector(selectIsContacts);
 
   const contacts = useSelector(state => state.contacts.items.length);
   const dispatch = useDispatch();
