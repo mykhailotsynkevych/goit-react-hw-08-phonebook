@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
+import { FaRegEye } from 'react-icons/fa';
+import { FaEyeSlash } from 'react-icons/fa';
+
 import operations from '../redux/auth/auth-operations';
 
 const RegisterPage = () => {
@@ -7,18 +11,26 @@ const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isPasswordShown, setIsPasswordShown] = useState(false);
+
+  const passwordRegex = /^[A-Za-z]{8,}$/;
 
   const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'name':
-        return setName(value);
-      case 'email':
-        return setEmail(value);
-      case 'password':
-        return setPassword(value);
-      default:
-        return;
+    if (name === 'password') {
+      // Проверка валидности пароля при каждом изменении
+      setIsPasswordValid(passwordRegex.test(value));
+      setPassword(value);
+    } else if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'name') {
+      setName(value);
     }
+  };
+
+  const handleTogglePasswordVisibility = (event) => {
+    console.log('click');
+    setIsPasswordShown(prevState => !prevState);
   };
 
   const handleSubmit = e => {
@@ -59,14 +71,35 @@ const RegisterPage = () => {
         </label>
         <label className="label">
           <span className="inputTitle">Password</span>
-          <input
-            className="input"
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-          <span className="inputTitle">min 8 characters</span>
+          <div className="passwordInputWrapper">
+            {password && (
+              <div
+                onClick={handleTogglePasswordVisibility}
+                className="togglePasswordVisibility"
+              >
+ 
+
+                {isPasswordShown ? (
+                  <FaEyeSlash size={18} />
+                ) : (
+                  <FaRegEye size={18} />
+                )}
+
+              </div>
+            )}
+            <input
+              className={`${
+                isPasswordValid ? 'inputValid' : 'inputInvalid'
+              } input`}
+              type={isPasswordShown ? 'text' : 'password'}
+              name="password"
+              value={password}
+              onChange={handleChange}
+            />
+          </div>
+          <span className="passworText">
+            Min 8 characters long
+          </span>
         </label>
         <button type="submit" className="button">
           Register
