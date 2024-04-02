@@ -9,13 +9,13 @@ let initialForm = {
 };
 
 const Form = () => {
-  const [form, setForm] = useState(initialForm);
+  const [newContact, setNewContact] = useState(initialForm);
   const contacts = useSelector(getVisibleContacts);
   const dispatch = useDispatch();
 
   const handleChange = e => {
     const { name, value } = e.target;
-    setForm(prev => {
+    setNewContact(prev => {
       return { ...prev, [name]: value };
     });
   };
@@ -24,13 +24,14 @@ const Form = () => {
     e.preventDefault();
     if (
       contacts.find(
-        contact => contact.name.toLowerCase() === form.name.toLowerCase()
+        contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
       )
     )
-      return alert(`${form.name} is already in contacts.`);
-    dispatch(addContacts(form));
+      return alert(`${newContact.name} is already in contacts.`);
 
-    setForm({ name: '', number: '' });
+    dispatch(addContacts(newContact));
+
+    setNewContact({ name: '', number: '' });
   };
 
   return (
@@ -44,7 +45,7 @@ const Form = () => {
             name="name"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            value={form.name}
+            value={newContact.name}
             onChange={handleChange}
           />
         </label>
@@ -56,7 +57,7 @@ const Form = () => {
             name="number"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={form.number}
+            value={newContact.number}
             onChange={handleChange}
           />
         </label>

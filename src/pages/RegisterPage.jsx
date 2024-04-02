@@ -28,11 +28,6 @@ const RegisterPage = () => {
     }
   };
 
-  const handleTogglePasswordVisibility = (event) => {
-    console.log('click');
-    setIsPasswordShown(prevState => !prevState);
-  };
-
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(operations.register({ name, email, password }));
@@ -74,7 +69,7 @@ const RegisterPage = () => {
           <div className="passwordInputWrapper">
             {password && (
               <div
-                onClick={handleTogglePasswordVisibility}
+                onClick={() => setIsPasswordShown(!isPasswordShown)}
                 className="togglePasswordVisibility"
               >
  
